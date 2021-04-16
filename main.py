@@ -1,15 +1,19 @@
-from typing import Optional
-
+from gensim.models import KeyedVectors
 from fastapi import FastAPI
 
 app = FastAPI()
+m_file = "models/geowac_tokens_none_fasttextskipgram_300_5_2020/model.model"
 
+items = {}
+@app.on_event("startup")
+async def startup_event():
+    items["model"] = KeyedVectors.load(m_file, mmap='r')
 
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}
 
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/similarity/{word_1}/{word_2}")
+async def get_similarity(word_1: str, word_2: str):
+    val = float(items["model"].similarity(word_1, word_2))
+    return {"value": val}
