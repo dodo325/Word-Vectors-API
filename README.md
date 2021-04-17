@@ -5,12 +5,12 @@ FastAPI for gensim nlp models
 ## Подготовка моделей:
 1. Качаем модель
 ```bash
-    wget http://vectors.nlpl.eu/repository/20/187.zip -P models
+    wget http://vectors.nlpl.eu/repository/20/214.zip -P models
 ```
 
 2. Распоковываем:
 ```bash
-    unzip 214.zip -d geowac_tokens_none_fasttextskipgram_300_5_2020
+    unzip models/214.zip -d models/geowac_tokens_none_fasttextskipgram_300_5_2020 && rm models/214.zip
 ```
 
 ## Локальный запуск:
